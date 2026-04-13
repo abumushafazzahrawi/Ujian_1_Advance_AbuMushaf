@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/upcomingEventFragment">
+
+    <fragment
+        android:id="@+id/upcomingEventFragment"
+        android:name="com.example.indonesianevents.UpcomingEventFragment"
+        android:label="fragment_upcoming_event"
+        tools:layout="@layout/fragment_upcoming_event" >
+        <action
+            android:id="@+id/action_upcomingEventFragment_to_detailEventFragment"
+            app:destination="@id/detailEventFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteEventFragment"
+        android:name="com.example.indonesianevents.FavoriteEventFragment"
+        android:label="fragment_favorite_event"
+        tools:layout="@layout/fragment_favorite_event" >
+        <action
+            android:id="@+id/action_favoriteEventFragment_to_detailEventFragment"
+            app:destination="@id/detailEventFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/finishingEventFragment"
+        android:name="com.example.indonesianevents.FinishingEventFragment"
+        android:label="fragment_finishing_event"
+        tools:layout="@layout/fragment_finishing_event" >
+        <action
+            android:id="@+id/action_finishingEventFragment_to_detailEventFragment"
+            app:destination="@id/detailEventFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.indonesianevents.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/detailEventFragment"
+        android:name="com.example.indonesianevents.DetailEventFragment"
+        tools:layout="@layout/fragment_detail_event"
+        android:label="DetailEventFragment" />
+</navigation>

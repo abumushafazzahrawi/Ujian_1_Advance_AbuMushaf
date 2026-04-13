@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Indonesian Events</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--    Halaman Favorit-->
+    <string name="favorit">Favorite Event</string>
+    <string name="recomendation">Recommendation event for you</string>
+
+    <!--    Event Menu-->
+    <string name="name">Name</string>
+    <string name="summary">Summary</string>
+    <string name="description">Description</string>
+    <string name="category">Category</string>
+    <string name="owner_name">Owner Name</string>
+    <string name="city_name">City name</string>
+    <string name="quota">Quota</string>
+    <string name="registrants">Registrants</string>
+    <string name="begin_time">Begin Time</string>
+    <string name="end_time">End Time</string>
+
+    <!--    Menu Bottom-->
+    <string name="upcoming">Upcoming</string>
+    <string name="finished">Finished</string>
+    <string name="favorite">Favorite</string>
+    <string name="setting">Setting</string>
+
+    <string name="upcoming_event">Upcoming Event</string>
+    <string name="finished_event">Finished Event</string>
+    <string name="setting_event">Setting Event</string>
+
+    <string name="dark_mode">Dark Mode</string>
+    <string name="enable_dark_mode">Enable Dark Mode</string>
+    <string name="disable_dark_mode">Disable Dark Mode</string>
+
+    <string name="btn_register">Register</string>
+    <string name="cari_event">Cari Event...</string>
+    <string name="description_content">Description Content</string>
+    <string name="summary_content">Summary Content</string>
+    <string name="event_name">Event Name</string>
+    <string name="event_image">Event Image</string>
+
+</resources>

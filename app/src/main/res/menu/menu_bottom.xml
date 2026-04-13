@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/upcomingEventFragment"
+        android:title="@string/upcoming"
+        android:icon="@drawable/ic_upcoming"/>
+
+    <item
+        android:id="@+id/finishingEventFragment"
+        android:title="@string/finished"
+        android:icon="@drawable/ic_approval"/>
+
+    <item
+        android:id="@+id/favoriteEventFragment"
+        android:title="@string/favorite"
+        android:icon="@drawable/ic_favorite"/>
+
+    <item
+        android:id="@+id/settingFragment"
+        android:title="@string/setting"
+        android:icon="@drawable/ic_setting"/>
+</menu>
