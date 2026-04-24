@@ -15,6 +15,7 @@ preferencesDataStore(name = "settings")
 
 class SettingPreference private constructor(private val dataStore: DataStore<Preferences>) {
     private val THEME_KEY = booleanPreferencesKey("theme_setting")
+    private val REMINDER_KEY = booleanPreferencesKey("reminder_setting")
 
     fun getThemeSetting(): Flow<Boolean> {
         return dataStore.data.map { preference ->
@@ -25,6 +26,18 @@ class SettingPreference private constructor(private val dataStore: DataStore<Pre
     suspend fun saveThemeSetting(isDarkModeActive: Boolean) {
         dataStore.edit { preference ->
             preference[THEME_KEY] = isDarkModeActive
+        }
+    }
+
+    fun getReminderSetting(): Flow<Boolean> {
+        return dataStore.data.map { preference ->
+            preference[REMINDER_KEY] ?: false
+        }
+    }
+
+    suspend fun saveReminderSetting(isReminderActive: Boolean) {
+        dataStore.edit { preference ->
+            preference[REMINDER_KEY] = isReminderActive
         }
     }
 

@@ -23,4 +23,10 @@ interface ApiService {
     suspend fun getDetailEvent(
         @Path("id") id: Int
     ): Response<ResponseEvent>
+
+    @GET("events")
+    suspend fun getNearestEvent(
+        @Query("active") active: Int = -1,
+        @Query("limit") limit: Int = 1
+    ): Response<ResponseEvent>
 }

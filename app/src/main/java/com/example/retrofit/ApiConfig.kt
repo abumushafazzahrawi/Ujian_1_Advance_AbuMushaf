@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 object ApiConfig {
     private const val BASE_URL = "https://event-api.dicoding.dev/"
 
-    fun getApiService(context: Context): ApiService {
+    fun getApiService(): ApiService {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
 

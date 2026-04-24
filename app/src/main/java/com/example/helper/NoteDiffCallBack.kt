@@ -2,7 +2,6 @@ package com.example.helper
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.database.EventEntity
-import com.example.event.Event
 
 class NoteDiffCallBack (private val oldEventList: List<EventEntity>, private
 val newEventList: List<EventEntity>) :

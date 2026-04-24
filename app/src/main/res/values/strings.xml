@@ -40,4 +40,11 @@
     <string name="event_name">Event Name</string>
     <string name="event_image">Event Image</string>
 
+    <string name="daily_reminder">Daily Reminder</string>
+    <string name="show_more">Show More</string>
+    <string name="notification">Notification</string>
+    <string name="enable_notification">Enable Notification</string>
+    <string name="disable_notification">Disable Notification</string>
+
+
 </resources>

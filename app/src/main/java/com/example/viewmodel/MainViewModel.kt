@@ -72,7 +72,7 @@ class MainViewModel(private val pref: SettingPreference) : ViewModel() {
         _isLoading.value = true
         viewModelScope.launch {
             try {
-                val response = ApiConfig.getApiService(context).getUpComingEvents()
+                val response = ApiConfig.getApiService().getUpComingEvents()
                 if (response.isSuccessful) {
                     val result = response.body()
                     val data = result?.listEvents ?: emptyList()
@@ -94,7 +94,7 @@ class MainViewModel(private val pref: SettingPreference) : ViewModel() {
         _isLoading.value = true
         viewModelScope.launch {
             try {
-                val response = ApiConfig.getApiService(context).getFinishedEvents()
+                val response = ApiConfig.getApiService().getFinishedEvents()
                 if (response.isSuccessful) {
                     val result = response.body()
                     val data = result?.listEvents ?: emptyList()
@@ -112,11 +112,11 @@ class MainViewModel(private val pref: SettingPreference) : ViewModel() {
         }
     }
 
-    fun searchEvents(context: Context, keyword: String) {
+    fun searchEvents(keyword: String) {
         _isLoading.value = true
         viewModelScope.launch {
             try {
-                val response = ApiConfig.getApiService(context).searchEvents(keyword = keyword)
+                val response = ApiConfig.getApiService().searchEvents(keyword = keyword)
                 if (response.isSuccessful) {
                     val result = response.body()
                     val data = result?.listEvents ?: emptyList()
@@ -142,7 +142,7 @@ class MainViewModel(private val pref: SettingPreference) : ViewModel() {
                 _isLoading.value = false
             } else {
                 try {
-                    val response = ApiConfig.getApiService(context).getDetailEvent(id)
+                    val response = ApiConfig.getApiService().getDetailEvent(id)
                     if (response.isSuccessful) {
                         val event = response.body()?.event
                         if (event != null) {
@@ -198,6 +198,16 @@ class MainViewModel(private val pref: SettingPreference) : ViewModel() {
     fun saveThemeSetting(isDarkModeActive: Boolean) {
         viewModelScope.launch {
             pref.saveThemeSetting(isDarkModeActive)
+        }
+    }
+
+    fun getReminderSettings(): LiveData<Boolean> {
+        return pref.getReminderSetting().asLiveData()
+    }
+
+    fun saveReminderSetting(isReminderActive: Boolean) {
+        viewModelScope.launch {
+            pref.saveReminderSetting(isReminderActive)
         }
     }
 }

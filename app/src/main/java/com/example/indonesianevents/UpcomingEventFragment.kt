@@ -1,14 +1,21 @@
 package com.example.indonesianevents
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.database.EventEntity
 import com.example.indonesianevents.databinding.FragmentUpcomingEventBinding
 import com.example.viewmodel.MainViewModel
 import com.example.viewmodel.ViewModelFactory
@@ -19,6 +26,13 @@ class UpcomingEventFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModels {
         ViewModelFactory(SettingPreference.getInstance(requireContext().dataStore))
+    }
+    private var isExpanded = false
+
+    companion object {
+        private const val NOTIFICATION_ID = 1
+        private const val CHANNEL_ID = "channel_01"
+        private const val CHANNEL_NAME = "dicoding channel"
     }
 
     override fun onCreateView(
@@ -53,12 +67,34 @@ class UpcomingEventFragment : Fragment() {
         binding.rvSearchResults.adapter = searchAdapter
 
         viewModel.eventListEntity.observe(viewLifecycleOwner) { data ->
-            adapter.setData(data)
+            val sorted = data.sortedBy { it.beginTime }
+            val finalData = if (isExpanded) {
+                sorted
+            } else {
+                sorted.take(1)
+            }
+            binding.tvMore.visibility = if (data.isNotEmpty()) View.VISIBLE else View.GONE
+            adapter.setData(finalData)
         }
 
+        binding.tvMore.setOnClickListener {
+            isExpanded = !isExpanded
+
+            viewModel.eventListEntity.value?.let { data ->
+                val sorted = data.sortedBy { it.beginTime }
+
+                if (isExpanded) {
+                    adapter.setData(sorted)
+                    binding.tvMore.text = "Show Less"
+                } else {
+                    adapter.setData(sorted.take(1))
+                    binding.tvMore.text = "Show More"
+                }
+            }
+        }
         viewModel.listEvent.observe(viewLifecycleOwner) { items ->
             val entities = items.map {
-                com.example.database.EventEntity(
+                EventEntity(
                     id = it.id,
                     name = it.name,
                     summary = it.summary,
@@ -77,6 +113,7 @@ class UpcomingEventFragment : Fragment() {
                 )
             }
             searchAdapter.setData(entities)
+
         }
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
@@ -91,9 +128,9 @@ class UpcomingEventFragment : Fragment() {
 
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
-            searchView.editText.setOnEditorActionListener { textView, actionId, event ->
+            searchView.editText.setOnEditorActionListener { _, _, _ ->
                 searchBar.setText(searchView.text)
-                viewModel.searchEvents(requireContext(), searchView.text.toString())
+                viewModel.searchEvents(searchView.text.toString())
                 false
             }
         }

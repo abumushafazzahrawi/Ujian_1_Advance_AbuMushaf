@@ -2,11 +2,11 @@ package com.example.indonesianevents
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
@@ -18,6 +18,7 @@ import com.example.indonesianevents.databinding.FragmentDetailEventBinding
 import com.example.viewmodel.MainViewModel
 import com.example.viewmodel.ViewModelFactory
 import androidx.core.net.toUri
+import com.example.helper.DateHelper
 
 class DetailEventFragment : Fragment() {
     private var _binding: FragmentDetailEventBinding? = null
@@ -50,6 +51,7 @@ class DetailEventFragment : Fragment() {
                 updateFavoriteIcon(event.isFavorite)
                 
                 binding.ivFavorite.setOnClickListener {
+                    Toast.makeText(requireContext(), "Favorite status updated", Toast.LENGTH_SHORT).show()
                     viewModel.setFavoriteEvent(requireContext(), event, !event.isFavorite)
                 }
             }
@@ -68,8 +70,8 @@ class DetailEventFragment : Fragment() {
             event.description,
             HtmlCompat.FROM_HTML_MODE_LEGACY
         )
-        binding.tvBeginTime.text = "Mulai: ${event.beginTime}"
-        binding.tvEndTime.text = "Berakhir: ${event.endTime}"
+        binding.tvBeginTime.text = "Mulai: ${DateHelper.getCurrentDate(event.beginTime)}"
+        binding.tvEndTime.text = "Berakhir: ${DateHelper.getCurrentDate(event.endTime)}"
         binding.tvQuota.text = "Quota: ${event.quota}"
         binding.tvRegistrants.text = "Registrants: ${event.registrants}"
         binding.tvCategory.text = event.category
